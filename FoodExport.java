@@ -4,26 +4,72 @@
  * @author (your name) 
  * @version (a version number or a date)
  */
+
 import edu.duke.*;
 import org.apache.commons.csv.*;
+import java.util.*;
+
 public class FoodExport 
 {
     public void tester() 
-    {
-        FileResource fr = new FileResource();
-        CSVParser parser = fr.getCSVParser();
+    {       
+        System.out.println("Program started");
+        Scanner scn = new Scanner(System.in);
+        FileResource fr = new FileResource("exports_small.csv");
+        CSVParser parser;
         
-        String cInfo = countryInfo(parser, "Germany");
-        System.out.println(cInfo);
+        System.out.println("What do you want to do? Type 1, 2, 3 or 4: ");
+        System.out.println("1 - Find Country Info");
+        System.out.println("2 - Find Two Item Exporters");
+        System.out.println("3 - Find No. Of Item Exporters");
+        System.out.println("4 - Find Big Exporters");
+        System.out.println("5 - Stop!");
         
-        parser = fr.getCSVParser();
-        listExportersTwoProducts(parser, "gold", "diamonds");
-        
-        parser = fr.getCSVParser();
-        numOfExporter(parser, "gold");
-        
-        parser = fr.getCSVParser();
-        bigExporters(parser, "$999,999,999");
+        String choice = scn.nextLine();
+        while (!choice.equals("5"))
+        {
+            if (choice.equals("1"))
+            {
+                parser = fr.getCSVParser();
+                System.out.println("COUNTRY INFO");
+                System.out.print("Enter Country: ");
+                String country = scn.nextLine(); 
+                System.out.println(countryInfo(parser, country));
+                System.out.println();
+            }
+            if (choice.equals("2"))
+            {
+                parser = fr.getCSVParser();
+                System.out.println("TWO ITEM EXPORTERS");
+                System.out.print("Enter Export Item 1: ");
+                String item1 = scn.nextLine();
+                System.out.print("Enter Export Item 2: ");
+                String item2 = scn.nextLine();
+                listExportersTwoProducts(parser, item1, item2);
+                System.out.println();
+            }
+            if (choice.equals("3"))
+            {
+                parser = fr.getCSVParser();
+                System.out.println("NO. OF GOLD EXPORTERS");
+                System.out.print("Enter Export Item: ");
+                String item = scn.nextLine();
+                numOfExporter(parser, item);
+                System.out.println();
+            }
+            if (choice.equals("4"))
+            {
+                parser = fr.getCSVParser();
+                System.out.println("BIG EXPORTERS");
+                System.out.print("Enter Value (with dollars and commas): ");
+                String value = scn.nextLine();
+                bigExporters(parser, value);
+                System.out.println();
+            }
+            System.out.println("What do you want to do? Type 1, 2, 3, 4 or 5: ");
+            choice = scn.nextLine();
+        }  
+        scn.close();
     }
     
     // returns a string of information about the country
@@ -77,9 +123,10 @@ public class FoodExport
         }
     }
     
-    public static void main(String args[]) 
+    public static void main(String[] args) 
     {
+        System.out.println("Main started");
         FoodExport fe = new FoodExport();
-        fe.tester();
+        fe.tester(); 
     }
 }
