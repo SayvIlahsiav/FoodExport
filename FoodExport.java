@@ -15,7 +15,7 @@ public class FoodExport
     {       
         System.out.println("Program started");
         Scanner scn = new Scanner(System.in);
-        FileResource fr = new FileResource("exports_small.csv");
+        FileResource fr = new FileResource("exportdata.csv");
         CSVParser parser;
         
         System.out.println("What do you want to do? Type 1, 2, 3 or 4: ");
@@ -30,39 +30,39 @@ public class FoodExport
         {
             if (choice.equals("1"))
             {
-                parser = fr.getCSVParser();
                 System.out.println("COUNTRY INFO");
                 System.out.print("Enter Country: ");
-                String country = scn.nextLine(); 
+                String country = scn.nextLine();
+                parser = fr.getCSVParser();
                 System.out.println(countryInfo(parser, country));
                 System.out.println();
             }
             if (choice.equals("2"))
             {
-                parser = fr.getCSVParser();
                 System.out.println("TWO ITEM EXPORTERS");
                 System.out.print("Enter Export Item 1: ");
                 String item1 = scn.nextLine();
                 System.out.print("Enter Export Item 2: ");
                 String item2 = scn.nextLine();
+                parser = fr.getCSVParser();
                 listExportersTwoProducts(parser, item1, item2);
                 System.out.println();
             }
             if (choice.equals("3"))
             {
-                parser = fr.getCSVParser();
-                System.out.println("NO. OF GOLD EXPORTERS");
+                System.out.println("NO. OF ITEM EXPORTERS");
                 System.out.print("Enter Export Item: ");
                 String item = scn.nextLine();
+                parser = fr.getCSVParser();
                 numOfExporter(parser, item);
                 System.out.println();
             }
             if (choice.equals("4"))
             {
-                parser = fr.getCSVParser();
                 System.out.println("BIG EXPORTERS");
                 System.out.print("Enter Value (with dollars and commas): ");
                 String value = scn.nextLine();
+                parser = fr.getCSVParser();
                 bigExporters(parser, value);
                 System.out.println();
             }
